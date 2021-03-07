@@ -1,0 +1,23 @@
+{
+  "codec": "datadriver:default",
+
+
+  "durability": [
+    20,
+    20,
+    20,
+    20
+  ],
+  "protection": [
+    2,
+    2,
+    2,
+    2
+  ],
+  "enchantability": 15,
+  "equip_sound": "minecraft:item.armor.equip_chain",
+  "repair_ingredient": [
+    "minecraft:iron_ingot"
+  ],
+  "name": "test_armor_material"
+}

@@ -1,0 +1,30 @@
+{
+  "codec": "datadriver:default",
+
+
+  "type": "beneficial",
+  "color": 10605296,
+  "is_instant": false,
+  "duration_effects": [
+    {
+      "type": "heal",
+      "float_amount": 5.0,
+      "can_be_amplified": true
+    }
+  ],
+  "instant_effects": [],
+  "modifiers": [
+    {
+      "attribute": "generic_movement_speed",
+      "amount": 3.0,
+      "operation": "multiply_total",
+      "increase_or_decrease": true
+    },
+    {
+      "attribute": "generic_max_health",
+      "amount": 2.5,
+      "operation": "multiply_total",
+      "increase_or_decrease": true
+    }
+  ]
+}

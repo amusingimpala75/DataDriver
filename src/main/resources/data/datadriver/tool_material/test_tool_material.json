@@ -1,0 +1,13 @@
+{
+  "codec": "datadriver:default",
+
+
+  "durability": 20,
+  "mining_speed": 20.0,
+  "attack_damage": 20.0,
+  "mining_level": 3,
+  "enchantability": 20,
+  "repair_ingredient": [
+    "minecraft:iron_ingot"
+  ]
+}

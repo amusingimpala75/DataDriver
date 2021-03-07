@@ -1,0 +1,10 @@
+{
+  "codec": "minecraft:block_item",
+
+
+  "settings": {
+    "max_count": 16,
+    "group": "datadriver:test_group"
+  },
+  "block": "datadriver:test_block"
+}

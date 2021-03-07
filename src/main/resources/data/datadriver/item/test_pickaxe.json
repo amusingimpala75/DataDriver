@@ -1,0 +1,11 @@
+{
+  "codec": "minecraft:pickaxe",
+
+
+  "settings": {
+    "group": "datadriver:test_group"
+  },
+  "material": "datadriver:test_tool_material",
+  "attack_damage": 1,
+  "attack_speed": 1.0
+}

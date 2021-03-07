@@ -1,0 +1,4 @@
+accessWidener	v1	named
+
+accessible method net/minecraft/recipe/Ingredient$Entry getStacks ()Ljava/util/Collection;
+accessible class net/minecraft/util/registry/DynamicRegistryManager$Info

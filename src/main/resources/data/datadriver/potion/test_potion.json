@@ -1,0 +1,28 @@
+{
+  "codec": "datadriver:default",
+
+
+  "name": "test_potion",
+  "effects": [
+    {
+      "effect": "minecraft:speed",
+      "duration": 3600
+    },
+    {
+      "effect": "minecraft:slowness",
+      "duration": 3600
+    },
+    {
+      "effect": "minecraft:haste",
+      "duration": 3600
+    },
+    {
+      "effect": "minecraft:mining_fatigue",
+      "duration": 3600
+    },
+    {
+      "effect": "datadriver:test_effect",
+      "duration": 3600
+    }
+  ]
+}

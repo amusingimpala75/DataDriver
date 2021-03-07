@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "datadriver",
+  "version": "${version}",
+  "name": "DataDriver",
+  "description": "Data Drives things",
+  "authors": [
+    "AmusingImpala75"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/datadriver/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.github.amusingimpala75.datadriver.client.DatadriverClient"
+    ],
+    "main": [
+      "com.github.amusingimpala75.datadriver.Datadriver"
+    ]
+  },
+  "accessWidener": "datadriver.accesswidener",
+  "mixins": [
+    "datadriver.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.1",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}

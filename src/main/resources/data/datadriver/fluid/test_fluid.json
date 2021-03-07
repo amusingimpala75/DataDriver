@@ -1,0 +1,8 @@
+{
+  "codec": "datadriver:default",
+
+
+  "block": "datadriver:test_fluid_block",
+  "bucket": "datadriver:test_bucket",
+  "tint": 8388352
+}

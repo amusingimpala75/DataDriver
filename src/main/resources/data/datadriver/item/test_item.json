@@ -1,0 +1,9 @@
+{
+  "codec": "minecraft:item",
+
+
+  "settings": {
+    "group": "datadriver:test_group",
+    "max_count": "32"
+  }
+}

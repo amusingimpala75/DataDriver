@@ -1,0 +1,9 @@
+{
+  "codec": "minecraft:bucket",
+
+
+  "settings": {
+    "group": "datadriver:test_group"
+  },
+  "fluid": "datadriver:test_fluid"
+}

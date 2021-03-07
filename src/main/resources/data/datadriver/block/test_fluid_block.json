@@ -1,0 +1,9 @@
+{
+  "codec": "minecraft:fluid_block",
+
+
+  "settings": {
+    "parent": "minecraft:water"
+  },
+  "fluid": "datadriver:test_fluid"
+}

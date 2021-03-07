@@ -1,0 +1,10 @@
+{
+  "codec": "minecraft:armor_piece",
+
+
+  "material": "datadriver:test_armor_material",
+  "slot": "head",
+  "settings": {
+    "group": "datadriver:test_group"
+  }
+}

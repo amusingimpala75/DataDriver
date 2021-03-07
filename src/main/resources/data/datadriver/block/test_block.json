@@ -1,0 +1,10 @@
+{
+  "codec": "minecraft:block",
+
+
+  "settings": {
+    "material": {
+      "color": 12
+    }
+  }
+}

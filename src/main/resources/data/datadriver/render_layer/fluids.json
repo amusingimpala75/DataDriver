@@ -1,0 +1,6 @@
+{
+  "type": "fluid",
+  "values": {
+    "datadriver:test_fluid": "translucent"
+  }
+}
