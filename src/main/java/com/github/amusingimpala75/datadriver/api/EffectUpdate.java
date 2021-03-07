@@ -34,13 +34,22 @@ public class EffectUpdate {
         this.canBeAmplified = canBeAmplified;
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public void applyEffect(LivingEntity entity, int amplifier) {
         switch (type) {
             case "heal":
-                entity.heal(fAmount.get());
+                float val2 = fAmount.get();
+                if (canBeAmplified) {
+                    val2 *= amplifier;
+                }
+                entity.heal(val2);
                 break;
             case "damage":
-                entity.damage(source.get(), fAmount.get());
+                float val1 = fAmount.get();
+                if (canBeAmplified) {
+                    val1 *= amplifier;
+                }
+                entity.damage(source.get(), val1);
                 break;
             case "exhaustion":
                 float val = fAmount.get();

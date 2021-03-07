@@ -18,7 +18,7 @@ public class BlockSettings2 {
             Codec.BOOL.fieldOf("is_solid").orElse(true).forGetter(s -> s.solidBlock),
             Codec.BOOL.fieldOf("suffocates").orElse(true).forGetter(s -> s.suffocates),
             Codec.BOOL.fieldOf("blocks_vision").orElse(true).forGetter(s -> s.blocksVision),
-            Codec.BOOL.fieldOf("postProcess").orElse(true).forGetter(s -> s.postProcess),
+            Codec.BOOL.fieldOf("post_process").orElse(true).forGetter(s -> s.postProcess),
             Codec.BOOL.fieldOf("emissive_lighting").orElse(false).forGetter(s -> s.emissiveLighting),
             CodecsImpl.MATERIAL_COLOR.optionalFieldOf("material_color").forGetter(s -> s.matColor),
             CodecsImpl.DYE_COLOR.optionalFieldOf("dye_color").forGetter(s -> s.dyeColor),

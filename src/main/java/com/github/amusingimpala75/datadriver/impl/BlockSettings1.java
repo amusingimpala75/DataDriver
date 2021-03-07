@@ -19,7 +19,7 @@ public class BlockSettings1 {
             Codec.FLOAT.optionalFieldOf("hardness").forGetter(b -> b.hardness),
             Codec.FLOAT.optionalFieldOf("resistance").forGetter(b -> b.resistance),
             Codec.BOOL.fieldOf("breaks_instantly").orElse(false).forGetter(b -> b.breaksInstantly),
-            Codec.BOOL.fieldOf("ticksRandomly").orElse(false).forGetter(b -> b.ticksRandomly),
+            Codec.BOOL.fieldOf("ticks_randomly").orElse(false).forGetter(b -> b.ticksRandomly),
             Codec.BOOL.fieldOf("dynamic_bounds").orElse(false).forGetter(b -> b.dynamicBounds),
             Codec.BOOL.fieldOf("drops_nothing").orElse(false).forGetter(b -> b.dropsNothing),
             Codec.BOOL.fieldOf("is_air").orElse(false).forGetter(b -> b.isAir),

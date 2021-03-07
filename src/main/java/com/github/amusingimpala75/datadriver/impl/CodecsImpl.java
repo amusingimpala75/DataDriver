@@ -60,6 +60,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.BlockView;
@@ -98,7 +99,7 @@ public class CodecsImpl {
             Codec.BOOL.fieldOf("is_meat").orElse(false).forGetter(FoodComponent::isMeat),
             Codec.BOOL.fieldOf("is_always_edible").orElse(false).forGetter(FoodComponent::isAlwaysEdible),
             Codec.BOOL.fieldOf("is_snack").orElse(false).forGetter(FoodComponent::isAlwaysEdible),
-            STATUS_EFFECT_INSTANCE_FOOD.listOf().fieldOf("effect").forGetter(FoodComponent::getStatusEffects)
+            STATUS_EFFECT_INSTANCE_FOOD.listOf().fieldOf("effects").forGetter(FoodComponent::getStatusEffects)
     ).apply(inst, (hunger, saturation, isMeat, isAlwaysEdible, isSnack, effect) -> {
         FoodComponent.Builder builder = new FoodComponent.Builder();
         hunger.ifPresent(builder::hunger);
@@ -147,9 +148,8 @@ public class CodecsImpl {
             Codec.BOOL.fieldOf("is_solid").orElse(true).forGetter(Material::isSolid),
             Codec.BOOL.fieldOf("blocks_movement").orElse(true).forGetter(Material::blocksMovement),
             Codec.BOOL.fieldOf("blocks_light").orElse(true).forGetter(Material::blocksLight),
-            Codec.BOOL.fieldOf("break_by_hand").orElse(true).forGetter(Material::isBurnable),
-            //Yarn did an oopsie
-            Codec.BOOL.fieldOf("burnable").orElse(false).forGetter(Material::isReplaceable),
+            Codec.BOOL.fieldOf("break_by_hand").orElse(true).forGetter(Material::isReplaceable),
+            Codec.BOOL.fieldOf("burnable").orElse(false).forGetter(Material::isBurnable),
             PISTON_BEHAVIOR.fieldOf("piston_behavior").orElse(PistonBehavior.NORMAL).forGetter(Material::getPistonBehavior)
     ).apply(inst, Material::new));
 
@@ -525,6 +525,11 @@ public class CodecsImpl {
             }
             return new BucketItem(fluid, set);
         }));
+
+        public static final Codec<AliasedBlockItem> ALIASED_BLOCK_ITEM = RecordCodecBuilder.create(inst -> inst.group(
+                Codecs.ITEM_SETTINGS.fieldOf("settings").forGetter(f -> ((ItemDuck)f).getSettings()),
+                Identifier.CODEC.fieldOf("block").forGetter(f -> Util.getIdOrThrow(Registry.BLOCK, f.getBlock()))
+        ).apply(inst, (set, bl) -> new AliasedBlockItem(Util.getOrThrow(Registry.BLOCK, bl), set)));
     }
 
     //TODO: Need more: SaplingBlock
@@ -827,7 +832,8 @@ public class CodecsImpl {
         for (Field field : DamageSource.class.getFields()) {
             if (field.getType().equals(DamageSource.class)) {
                 try {
-                    damageSrcMap.put(remapper.mapFieldName("intermediary", remapper.mapClassName("intermediary", DamageSource.class.getName()), field.getName(), "L"+remapper.mapClassName("intermediary", DamageSource.class.getName())+";").toLowerCase(Locale.ROOT), (DamageSource) field.get(null));
+                    damageSrcMap.put(((DamageSource)field.get(null)).name, (DamageSource)field.get(null));
+                    //damageSrcMap.put(remapper.mapFieldName("intermediary", remapper.mapClassName("intermediary", DamageSource.class.getName()), field.getName(), "L"+remapper.mapClassName("intermediary", DamageSource.class.getName())+";").toLowerCase(Locale.ROOT), (DamageSource) field.get(null));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
@@ -837,10 +843,10 @@ public class CodecsImpl {
 
     public static final Codec<DamageSource> DAMAGE_SOURCE = Codec.STRING.comapFlatMap((s) -> DataResult.success(damageSrcMap.get(s)), DamageSource::getName);
 
-    private static final Map<String, EntityAttribute> modifierMap = new HashMap<>();
+    private static final Map<Identifier, EntityAttribute> modifierMap = new HashMap<>();
 
     static {
-        for (Field field : EntityAttributes.class.getFields()) {
+        /*for (Field field : EntityAttributes.class.getFields()) {
             if (field.getType().equals(EntityAttribute.class)) {
                 try {
                     modifierMap.put(remapper.mapFieldName("intermediary", remapper.mapClassName("intermediary", DamageSource.class.getName()), field.getName(), "L"+remapper.mapClassName("intermediary", DamageSource.class.getName())+";").toLowerCase(Locale.ROOT), (EntityAttribute) field.get(null));
@@ -848,10 +854,14 @@ public class CodecsImpl {
                     e.printStackTrace();
                 }
             }
+        }*/
+
+        for (Map.Entry<RegistryKey<EntityAttribute>, EntityAttribute> ea : Registry.ATTRIBUTE.getEntries()) {
+            modifierMap.put(ea.getKey().getValue(), ea.getValue());
         }
     }
 
-    public static final Codec<EntityAttribute> ENTITY_ATTRIBUTE = Codec.STRING.comapFlatMap(s -> DataResult.success(modifierMap.get(s)), ea -> ea.getTranslationKey().substring(8));
+    public static final Codec<EntityAttribute> ENTITY_ATTRIBUTE = Identifier.CODEC.comapFlatMap(s -> DataResult.success(modifierMap.get(s)), ea -> new Identifier(ea.getTranslationKey().substring(8)));
 
     public static final Codec<EntityAttributeModifier.Operation> ATTRIBUTE_OPERATION = Util.createEnumCodec(EntityAttributeModifier.Operation.class);
 

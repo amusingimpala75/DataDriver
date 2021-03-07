@@ -18,13 +18,11 @@
       "attribute": "generic_movement_speed",
       "amount": 3.0,
       "operation": "multiply_total",
-      "increase_or_decrease": true
     },
     {
       "attribute": "generic_max_health",
       "amount": 2.5,
       "operation": "multiply_total",
-      "increase_or_decrease": true
     }
   ]
 }
